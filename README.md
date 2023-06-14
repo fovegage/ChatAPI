@@ -2,22 +2,34 @@
 
 ### TODO
 
+- [ ] 上下文聊天
 - [ ] awesome-free-chatgpt接入
+    - [x] tchat
+    - [ ] theb
 - [ ] midjourney-proxy接入
 - [ ] stable-diffusion接入
 - [ ] 定时消息发送
     - [ ] server酱
     - [ ] 企业微信
+- [ ] 历史消息
+    - [ ] 查询
+    - [ ] 保存
 
 ### 技术栈
 
 - sse
 - Spring Flux
 
-### 答疑
+### 维护站点
+
+- [tchat](http://vip.tchat.asia:666/index)
+- [theb](https://chatbot.theb.ai/)
+
+### Q&A
 
 ```
-
+Q: conversationId和parentMessageId是什么
+A: parentMessageId管理conversationId的id, 每一次问答都会产生一个conversationId, parentMessageId即上下文的关联
 ```
 
 ### 鸣谢
