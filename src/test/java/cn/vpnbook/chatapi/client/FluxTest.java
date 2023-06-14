@@ -62,7 +62,7 @@ public class FluxTest {
         JSONObject options = new JSONObject();
         options.put("conversationId", java.util.UUID.randomUUID());
         options.put("parentMessageId", java.util.UUID.randomUUID());
-        params.put("options", Collections.singleton(options));
+        params.put("options", options);
 
         JSONObject config = new JSONObject();
         config.put("temperature", 0.8);
@@ -71,7 +71,7 @@ public class FluxTest {
         config.put("model", "gpt-3.5-turbo");
         config.put("maxContextCount", 3);
         config.put("online", false);
-        params.put("config", Collections.singleton(config));
+        params.put("config", config);
 
         params.put("systemMessage", "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.");
 
@@ -98,7 +98,7 @@ public class FluxTest {
                 .uri(uri)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
 //                .accept(MediaType.APPLICATION_STREAM_JSON) // 设置接受流式JSON数据
-                .bodyValue(requestBody)
+                .bodyValue(params.toJSONString())
                 .retrieve()
                 .bodyToFlux(String.class)
 //                .onErrorResume(WebClientResponseException.class, ex -> {

@@ -3,6 +3,7 @@ package cn.vpnbook.chatapi.listener;
 import cn.vpnbook.chatapi.core.enmus.MessageType;
 import cn.vpnbook.chatapi.dto.Message;
 import cn.vpnbook.chatapi.dto.MessageRes;
+import cn.vpnbook.chatapi.utils.R;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Subscriber;
@@ -39,31 +40,19 @@ public class OpenAISubscriber implements Subscriber<String>, Disposable {
     @Override
     public void onNext(String data) {
         log.info("OpenAI返回数据：{}", data);
-        if (messageType == MessageType.IMAGE) {
-            subscription.request(1);
-            sb.append(data);
-            return;
-        }
-        if ("[DONE]".equals(data)) {
-            log.info("OpenAI返回数据结束了");
-            subscription.request(1);
-            emitter.next(JSON.toJSONString(new MessageRes(MessageType.TEXT, "", true)));
-            completedCallBack.completed(questions, sessionId, sb.toString());
-            emitter.complete();
-        } else {
-//            OpenAiResponse openAiResponse = JSON.parseObject(data, OpenAiResponse.class);
-//            String content = openAiResponse.getChoices().get(0).getDelta().getContent();
-//            content = content == null ? "" : content;
-//            emitter.next(JSON.toJSONString(new MessageRes(MessageType.TEXT, content, null)));
-//            sb.append(content);
-//            subscription.request(1);
-        }
-
+        MessageRes res = MessageRes.builder().message("")
+                .end(Boolean.FALSE)
+                .messageType(messageType).build();
+        res.setMessage(data);
+        emitter.next(JSON.toJSONString(R.success(res)));
+        sb.append(data);
+        subscription.request(1);
     }
 
     @Override
     public void onError(Throwable t) {
         log.error("OpenAI返回数据异常：{}", t.getMessage());
+        emitter.next(JSON.toJSONString(R.fail(t.getMessage())));
         emitter.error(t);
         completedCallBack.fail(sessionId);
     }
@@ -71,12 +60,7 @@ public class OpenAISubscriber implements Subscriber<String>, Disposable {
     @Override
     public void onComplete() {
         log.info("OpenAI返回数据完成");
-//        if (messageType == MessageType.IMAGE) {
-//            OpenAiImageResponse aiImageResponse = JSON.parseObject(sb.toString(), OpenAiImageResponse.class);
-//            String url = aiImageResponse.getData().stream().map(DataRes::getUrl).collect(Collectors.joining(","));
-//            emitter.next(JSON.toJSONString(new MessageRes(MessageType.IMAGE, url, true)));
-//        }
-//        emitter.complete();
+        emitter.complete();
     }
 
     @Override

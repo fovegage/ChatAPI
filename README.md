@@ -2,14 +2,23 @@
 
 ### TODO
 
-- [ ] 完成awesome-free-chatgpt的接入
-- [ ] 完成midjourney-proxy的接入
-- [ ] 完成stable-diffusion的接入
+- [ ] awesome-free-chatgpt接入
+- [ ] midjourney-proxy接入
+- [ ] stable-diffusion接入
+- [ ] 定时消息发送
+    - [ ] server酱
+    - [ ] 企业微信
 
 ### 技术栈
 
 - sse
 - Spring Flux
+
+### 答疑
+
+```
+
+```
 
 ### 鸣谢
 
