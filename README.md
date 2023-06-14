@@ -3,11 +3,12 @@
 ### TODO
 
 - [ ] 上下文聊天
-- [ ] awesome-free-chatgpt接入
+- [ ] free-chatgpt
     - [x] tchat
     - [ ] theb
-- [ ] midjourney-proxy接入
-- [ ] stable-diffusion接入
+    - [ ] freegpt
+- [ ] midjourney-proxy
+- [ ] stable-diffusion
 - [ ] 定时消息发送
     - [ ] server酱
     - [ ] 企业微信
@@ -24,6 +25,7 @@
 
 - [tchat](http://vip.tchat.asia:666/index)
 - [theb](https://chatbot.theb.ai/)
+- [freegpt](https://freegpt.one/)
 
 ### Q&A
 
