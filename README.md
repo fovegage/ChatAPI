@@ -3,10 +3,12 @@
 ### TODO
 
 - [ ] 上下文聊天
+- [ ] 健康检查
 - [ ] free-chatgpt
     - [x] tchat
     - [ ] theb
     - [ ] freegpt
+    - [ ] chatppt
 - [ ] midjourney-proxy
 - [ ] stable-diffusion
 - [ ] 定时消息发送
@@ -15,6 +17,7 @@
 - [ ] 历史消息
     - [ ] 查询
     - [ ] 保存
+- [ ] 消息搜索
 
 ### 技术栈
 
@@ -26,6 +29,7 @@
 - [tchat](http://vip.tchat.asia:666/index)
 - [theb](https://chatbot.theb.ai/)
 - [freegpt](https://freegpt.one/)
+- [chatppt](https://chatppt.com/index?cat=9)
 
 ### Q&A
 

@@ -39,6 +39,7 @@ public class OpenAISubscriber implements Subscriber<String>, Disposable {
 
     @Override
     public void onNext(String data) {
+        // -^&^- 如何处理特定的  拦截器
         log.info("OpenAI返回数据：{}", data);
         MessageRes res = MessageRes.builder().message("")
                 .end(Boolean.FALSE)
@@ -46,6 +47,7 @@ public class OpenAISubscriber implements Subscriber<String>, Disposable {
         res.setMessage(data);
         emitter.next(JSON.toJSONString(R.success(res)));
         sb.append(data);
+        // 请求下一个数据项
         subscription.request(1);
     }
 
@@ -60,6 +62,14 @@ public class OpenAISubscriber implements Subscriber<String>, Disposable {
     @Override
     public void onComplete() {
         log.info("OpenAI返回数据完成");
+        // 将根据该标志判断 sse.close()
+        MessageRes res = MessageRes.builder().message("")
+                .end(Boolean.TRUE)
+                .messageType(messageType).build();
+        emitter.next(JSON.toJSONString(R.success(res)));
+
+        // 存储数据
+        completedCallBack.completed(questions, sessionId, sb.toString());
         emitter.complete();
     }
 

@@ -6,21 +6,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
-import javax.annotation.PostConstruct;
-
 @Component
-public class TchatSite {
+public class TchatSite extends AbstractSite {
     /*
         http://vip.tchat.asia:666
      */
 
-    private WebClient webClient;
-
-    @PostConstruct
-    public void init() {
-        this.webClient = WebClient.builder()
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                .build();
+    @Override
+    protected void configureWebclient(WebClient.Builder builder) {
     }
 
     public String buildBody(String prompt, String systemMessage) {

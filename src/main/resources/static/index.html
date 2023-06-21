@@ -127,11 +127,17 @@
                 )
 
                 sse.addEventListener('error', function () {
+                    // 如果报错关闭 sse 客户端
                     console.log('error')
                     this_.generating = false
-                    alert('服务器错误，请查看日志')
+                    sse.close()
+                    // alert('服务器错误，请查看日志')
                 })
-
+                sse.addEventListener('close', function () {
+                    console.log('服务器主动关闭')
+                    this_.generating = false
+                    // alert('服务关闭')
+                })
             }
         },
         mounted() {
